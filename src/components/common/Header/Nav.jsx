@@ -137,8 +137,9 @@ const Nav = () => {
               <div className="absolute rounded-sm shadow-md w-[200px] bg-common dark:bg-darkPrimary overflow-hidden right-0 top-12 text-sm">
                 <div className="flex flex-col cursor-pointer">
                   <Link
+                    onClick={() => setIsOpen(!isOpen)}
                     to="/"
-                    className="block md:hidden px-4 py-3 text-darkPrimary dark:text-common hover:text-secondary transition font-semibold"
+                    className="block px-4 py-3 text-darkPrimary dark:text-common hover:text-secondary transition font-semibold"
                   >
                     Home
                   </Link>
@@ -146,37 +147,47 @@ const Nav = () => {
                   {user ? (
                     <>
                       <Link
+                        onClick={() => setIsOpen(!isOpen)}
                         to="/dashboard"
                         className="block px-4 py-3 text-darkPrimary dark:text-common hover:text-secondary transition font-semibold"
                       >
                         Dashboard
                       </Link>
                       <Link
-                        to="/contactUs"
+                        onClick={() => setIsOpen(!isOpen)}
+                        to="/contact-us"
                         className="px-4 py-3 text-darkPrimary dark:text-common hover:text-secondary transition font-semibold"
                       >
                         ContactUs
                       </Link>
-                      <div className="px-4 py-3 text-darkPrimary dark:text-common hover:text-secondary transition font-semibold cursor-pointer">
+                      <div
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="px-4 py-3 text-darkPrimary dark:text-common hover:text-secondary transition font-semibold cursor-pointer"
+                      >
                         Sign Out
                       </div>
                     </>
                   ) : (
                     <>
                       <div
-                        onClick={() => navigate("/dashboard")}
+                        onClick={() => {
+                          navigate("/dashboard");
+                          setIsOpen(!isOpen);
+                        }}
                         className="px-4 py-3 text-[#17171980] dark:text-[#F5F5F580] transition font-semibold cursor-pointer"
                       >
                         Dashboard
                       </div>
                       <Link
-                        to="/contactUs"
+                        onClick={() => setIsOpen(!isOpen)}
+                        to="/contact-us"
                         className="px-4 py-3 text-darkPrimary dark:text-common hover:text-secondary transition font-semibold"
                       >
                         Contact Us
                       </Link>
                       <Link
-                        to="/singIn"
+                        onClick={() => setIsOpen(!isOpen)}
+                        to="/sing-in"
                         className="px-4 py-3 text-darkPrimary dark:text-common hover:text-secondary transition font-semibold"
                       >
                         Sign In

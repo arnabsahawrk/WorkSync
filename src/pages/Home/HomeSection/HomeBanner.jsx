@@ -2,10 +2,22 @@ import { Button } from "@material-tailwind/react";
 import Container from "../../../components/common/Others/Container";
 import Marquee from "react-fast-marquee";
 import { useState } from "react";
+import queryString from "query-string";
+import { useNavigate } from "react-router-dom";
 
 const HomeBanner = () => {
-  const [email, setEmail] = useState(null);
+  const [email, setEmail] = useState("");
   const onChange = ({ target }) => setEmail(target.value);
+  const navigate = useNavigate();
+
+  const handleContact = () => {
+    const url = queryString.stringifyUrl({
+      url: "/contact-us",
+      query: { email },
+    });
+    navigate(url);
+  };
+
   return (
     <section className="bg-primary py-20">
       <Container className="space-y-6">
@@ -23,8 +35,8 @@ const HomeBanner = () => {
           </p>
         </div>
         {/* Input Part */}
-        <form className="pt-5">
-          <div className="relative mx-auto flex w-full max-w-[24rem] md:max-w-[30rem]">
+        <form className="pt-5" onSubmit={handleContact}>
+          <div className="relative mx-auto flex w-full max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem]">
             <input
               type="email"
               placeholder="Enter your email"
@@ -35,10 +47,8 @@ const HomeBanner = () => {
             <Button
               type="submit"
               disabled={!email}
-              className={`!absolute right-2 top-[8px] rounded dark:text-common text-darkPrimary capitalize ${
-                email
-                  ? "bg-secondary"
-                  : "bg-[#fdb71ccc] py-1.5 md:py-3 text-base md:text-lg"
+              className={`!absolute right-2 top-[8px] rounded dark:text-common text-darkPrimary capitalize py-1.5 md:py-3 text-base md:text-lg ${
+                email ? "bg-secondary" : "bg-[#fdb71ccc]"
               }`}
             >
               Contact Us

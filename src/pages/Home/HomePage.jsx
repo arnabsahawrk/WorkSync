@@ -1,5 +1,5 @@
 import PageTitle from "../../components/common/Others/PageTitle";
-import HomeBanner from "./Section/HomeBanner";
+import HomeBanner from "./HomeSection/HomeBanner";
 
 const HomePage = () => {
   return (
