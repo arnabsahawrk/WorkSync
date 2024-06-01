@@ -12,7 +12,7 @@ const TestimonialSwiper = () => {
           color="white"
           size="lg"
           onClick={handlePrev}
-          className="!absolute invisible xl:visible xl:top-2/4 xl:left-4 xl:-translate-y-2/4 border border-common w-10 h-10 rounded-full z-50"
+          className="!absolute invisible xl:visible xl:top-2/4 xl:left-4 xl:-translate-y-2/4 border border-common w-10 h-10 rounded-full z-30"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +36,7 @@ const TestimonialSwiper = () => {
           color="white"
           size="lg"
           onClick={handleNext}
-          className="!absolute invisible xl:visible xl:top-2/4 xl:!right-4 xl:-translate-y-2/4 border border-common w-10 h-10 rounded-full z-50"
+          className="!absolute invisible xl:visible xl:top-2/4 xl:!right-4 xl:-translate-y-2/4 border border-common w-10 h-10 rounded-full z-30"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +55,7 @@ const TestimonialSwiper = () => {
         </IconButton>
       )}
       navigation={({ setActiveIndex, activeIndex, length }) => (
-        <div className="absolute -bottom-0 left-2/4 z-50 -translate-x-2/4 gap-2 flex xl:hidden">
+        <div className="absolute -bottom-0 left-2/4 z-30 -translate-x-2/4 gap-2 flex xl:hidden">
           {new Array(length).fill("").map((_, i) => (
             <span
               key={i}

@@ -1,22 +1,48 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Container from "../../components/common/Others/Container";
 
 const ErrorPage = () => {
   const navigate = useNavigate();
   return (
-    <section>
+    <section className="bg-common">
       <Container className="h-screen flex flex-col items-center justify-center py-10">
-        <img
-          className="size-full object-contain"
-          src="https://i.postimg.cc/T1Qg4Rqd/404.jpg"
-          alt="404"
-        />
-        <button
-          onClick={() => navigate(-1)}
-          className="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-        >
-          Back
-        </button>
+        <div className="w-full max-w-[552px]">
+          {/* Logo */}
+          <Link
+            to="/"
+            className="flex justify-center items-center gap-2 bg-primary py-2 rounded-t-md"
+          >
+            <img
+              src="https://i.postimg.cc/8PXkRHGy/work-sync.png"
+              alt="WorkSync"
+              className="size-8 object-cover"
+            />
+            <h1 className="text-common text-2xl font-bold">WorkSync</h1>
+          </Link>
+          <div className="bg-white p-6 rounded-b-md border border-gray-400 text-center flex flex-col justify-center items-center gap-5">
+            <img
+              src="https://identity.ripplingcdn.com/68fa96c8cbc46b546352.svg"
+              alt
+              aria-hidden="true"
+              style={{ width: 140, height: 140 }}
+            />
+            <p className="text-darkPrimary font-semibold text-2xl">
+              Unknown error
+            </p>
+            <p className="text-darkPrimaryBg">
+              Sorry for the inconvenience. We have notified our team and will
+              try to identify the cause of this. Please refer to this error code
+              when you reach out to our technical support team.
+            </p>
+            <p className="text-darkPrimaryBg">Error: 404</p>
+            <button
+              onClick={() => navigate(-1)}
+              className="border-2 border-primary w-full py-[14px] rounded font-bold hover:shadow-xl"
+            >
+              Back
+            </button>
+          </div>
+        </div>
       </Container>
     </section>
   );

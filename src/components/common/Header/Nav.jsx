@@ -86,7 +86,7 @@ const Nav = () => {
 
   return (
     <nav
-      className={`sticky top-0 left-0 right-0 z-10 w-full py-4 ${
+      className={`sticky top-0 left-0 right-0 z-50 w-full py-4 ${
         active ? "bg-common dark:bg-darkPrimary" : "bg-primary"
       }`}
     >
@@ -187,7 +187,7 @@ const Nav = () => {
                       </Link>
                       <Link
                         onClick={() => setIsOpen(!isOpen)}
-                        to="/sing-in"
+                        to="/sign-in"
                         className="px-4 py-3 text-darkPrimary dark:text-common hover:text-secondary transition font-semibold"
                       >
                         Sign In
