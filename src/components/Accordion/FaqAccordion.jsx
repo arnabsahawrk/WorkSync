@@ -13,7 +13,7 @@ const FaqAccordion = () => {
   const handleOpen = (value) => setOpen(open === value ? 0 : value);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
+    <div className="grid grid-cols-1 xl:grid-cols-2 place-items-center">
       <FaqLottie />
       <div>
         <Accordion

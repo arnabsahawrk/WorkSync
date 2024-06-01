@@ -1,3 +1,4 @@
+import ManagementCountUp from "../../../components/CountUp/ManagementCountUp";
 import Container from "../../../components/common/Others/Container";
 
 const HomeManagementNumbers = () => {
@@ -10,6 +11,7 @@ const HomeManagementNumbers = () => {
             Workforce Management In Numbers
           </h1>
         </div>
+        <ManagementCountUp />
       </Container>
     </section>
   );
