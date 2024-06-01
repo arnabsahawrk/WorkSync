@@ -14,6 +14,9 @@ export default withMT({
         darkPrimary: "#171719",
         mildPrimary: "#502D3C",
         lightPrimary: "#866674",
+        primaryBg: "#f6f3f0",
+        darkPrimaryBg: "#2f2f2f",
+        rareColor: "#21968e",
       },
       fontFamily: {
         inter: `"Inter", sans-serif`,

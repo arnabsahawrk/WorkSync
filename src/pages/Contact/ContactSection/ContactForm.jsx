@@ -1,6 +1,9 @@
 import { useSearchParams } from "react-router-dom";
-import RatingShowcase from "./RatingShowcase";
+import RatingShowcase from "../../../components/RatingShowcase/RatingShowcase";
 import Container from "../../../components/common/Others/Container";
+import CommonInput from "../../../components/common/Inputs/CommonInput";
+import CommonTextArea from "../../../components/common/Inputs/CommonTextArea";
+import SubmitButton from "../../../components/common/Buttons/SubmitButton";
 
 const ContactForm = () => {
   const [params] = useSearchParams();
@@ -19,66 +22,23 @@ const ContactForm = () => {
         {/* //Form  */}
         <form className="px-10 flex flex-col justify-center items-center gap-3">
           {/* Email  */}
-          <div className="max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem] w-full">
-            <input
-              defaultValue={email ? email : ""}
-              placeholder="Work email address"
-              type="email"
-              className="block w-full px-4 py-3 text-lightPrimary bg-mildPrimary border-2 border-lightPrimary rounded-md focus:outline-none placeholder:text-lightPrimary"
-              required
-            />
-          </div>
+          <CommonInput
+            value={email}
+            placeholder="Work email address"
+            type="email"
+          />
           {/* Name  */}
-          <div className="max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem] w-full">
-            <input
-              placeholder="Full name"
-              type="text"
-              className="block w-full px-4 py-3 text-lightPrimary bg-mildPrimary border-2 border-lightPrimary rounded-md focus:outline-none placeholder:text-lightPrimary"
-              required
-            />
-          </div>
+          <CommonInput placeholder="Full name" type="text" />
           {/* Company Name  */}
-          <div className="max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem] w-full">
-            <input
-              placeholder="Company name"
-              type="text"
-              className="block w-full px-4 py-3 text-lightPrimary bg-mildPrimary border-2 border-lightPrimary rounded-md focus:outline-none placeholder:text-lightPrimary"
-              required
-            />
-          </div>
+          <CommonInput placeholder="Company name" type="text" />
           {/* Location  */}
-          <div className="max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem] w-full">
-            <input
-              placeholder="Enter your location"
-              type="text"
-              className="block w-full px-4 py-3 text-lightPrimary bg-mildPrimary border-2 border-lightPrimary rounded-md focus:outline-none placeholder:text-lightPrimary"
-              required
-            />
-          </div>
+          <CommonInput placeholder="Enter your location" type="text" />
           {/* Phone  */}
-          <div className="max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem] w-full">
-            <input
-              placeholder="Phone"
-              type="number"
-              className="block w-full px-4 py-3 text-lightPrimary bg-mildPrimary border-2 border-lightPrimary rounded-md focus:outline-none placeholder:text-lightPrimary"
-              required
-            />
-          </div>
+          <CommonInput placeholder="Phone" type="number" />
           {/* Message  */}
-          <div className="max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem] w-full">
-            <textarea
-              rows={3}
-              placeholder="Your message to us..."
-              className="block w-full px-4 py-3 text-lightPrimary bg-mildPrimary border-2 border-lightPrimary rounded-md focus:outline-none placeholder:text-lightPrimary"
-              required
-            ></textarea>
-          </div>
+          <CommonTextArea placeholder="Your message to us..." />
           {/* Send  */}
-          <div className="max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem] w-full">
-            <button className="block w-full px-4 py-3 bg-secondary hover:bg-[#fdb71ccc] transition duration-200 text-base md:text-lg rounded dark:text-common text-darkPrimary font-semibold">
-              Send
-            </button>
-          </div>
+          <SubmitButton text="Send" />
           <p className="text-center text-xs text-lightPrimary font-semibold mt-2">
             By clicking &quot;Send&quot; you agree to WorkSync&apos;s Privacy
             Notice

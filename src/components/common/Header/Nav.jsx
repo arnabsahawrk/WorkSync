@@ -158,7 +158,7 @@ const Nav = () => {
                         to="/contact-us"
                         className="px-4 py-3 text-darkPrimary dark:text-common hover:text-secondary transition font-semibold"
                       >
-                        ContactUs
+                        Contact Us
                       </Link>
                       <div
                         onClick={() => setIsOpen(!isOpen)}

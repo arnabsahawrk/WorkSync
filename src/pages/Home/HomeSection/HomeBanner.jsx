@@ -19,7 +19,7 @@ const HomeBanner = () => {
   };
 
   return (
-    <section className="bg-primary py-20">
+    <section className="bg-primary py-10 lg:py-20">
       <Container className="space-y-6">
         {/* Upper Part */}
         <div className="text-common text-center space-y-3 md:space-y-5">
