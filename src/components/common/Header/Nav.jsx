@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import Container from "../Others/Container";
 import { SlClose } from "react-icons/sl";
+import toast from "react-hot-toast";
 
 const Nav = () => {
   const [active, setActive] = useState(false);
@@ -81,8 +82,41 @@ const Nav = () => {
   //----------------------------
 
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, signOutUser } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+
+  //Sign Out
+  const signOut = async () => {
+    try {
+      await signOutUser();
+      toast.success("Sign Out Successful.", {
+        style: {
+          border: "2px solid #866674",
+          padding: "16px",
+          color: "#F5F5F5",
+          background: "#502D3C",
+        },
+        iconTheme: {
+          primary: "#fdb71c",
+          secondary: "#F5F5F5",
+        },
+      });
+      navigate("/");
+    } catch {
+      toast.error("Failed, Try Again.", {
+        style: {
+          border: "2px solid #866674",
+          padding: "16px",
+          color: "#F5F5F5",
+          background: "#502D3C",
+        },
+        iconTheme: {
+          primary: "#CD2728",
+          secondary: "#F5F5F5",
+        },
+      });
+    }
+  };
 
   return (
     <nav
@@ -161,7 +195,10 @@ const Nav = () => {
                         Contact Us
                       </Link>
                       <div
-                        onClick={() => setIsOpen(!isOpen)}
+                        onClick={() => {
+                          setIsOpen(!isOpen);
+                          signOut();
+                        }}
                         className="px-4 py-3 text-darkPrimary dark:text-common hover:text-secondary transition font-semibold cursor-pointer"
                       >
                         Sign Out

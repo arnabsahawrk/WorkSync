@@ -5,6 +5,7 @@ import HomePage from "../pages/Home/HomePage";
 import ContactPage from "../pages/Contact/ContactPage";
 import SignInPage from "../pages/Authentication/SignInPage";
 import SignUpPage from "../pages/Authentication/SignUpPage";
+import GuestOnlyRoute from "./GuestOnlyRoute";
 
 const router = createBrowserRouter([
   {
@@ -25,12 +26,20 @@ const router = createBrowserRouter([
   {
     path: "/sign-in",
     errorElement: <ErrorLayout />,
-    element: <SignInPage />,
+    element: (
+      <GuestOnlyRoute>
+        <SignInPage />
+      </GuestOnlyRoute>
+    ),
   },
   {
     path: "/sign-up",
     errorElement: <ErrorLayout />,
-    element: <SignUpPage />,
+    element: (
+      <GuestOnlyRoute>
+        <SignUpPage />
+      </GuestOnlyRoute>
+    ),
   },
 ]);
 

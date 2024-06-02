@@ -7,6 +7,7 @@ import { RouterProvider } from "react-router-dom";
 import router from "./routes/Routes";
 import { HelmetProvider } from "react-helmet-async";
 import CustomProvider from "./providers/CustomProvider";
+import { Toaster } from "react-hot-toast";
 
 // Create a client for TanStack
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         {/* custom provider  */}
         <CustomProvider>
           <RouterProvider router={router} />
+          <Toaster />
         </CustomProvider>
       </HelmetProvider>
       <ReactQueryDevtools initialIsOpen={false} />

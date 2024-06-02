@@ -1,12 +1,107 @@
 import { FcGoogle } from "react-icons/fc";
 import { TbEyeCancel, TbEyeCheck } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Container from "../../../components/common/Others/Container";
-import SubmitButton from "../../../components/common/Buttons/SubmitButton";
 import { useState } from "react";
+import { ImSpinner10 } from "react-icons/im";
+import useAuth from "../../../hooks/useAuth";
+import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
 
 const SignInForm = () => {
   const [passVisible, setPassVisible] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const { authLoading, setAuthLoading, signInWithGoogle, signInUser } =
+    useAuth();
+
+  //Authenticate User
+  const handleFormSubmit = async (e) => {
+    const { email, password } = e;
+
+    //Login New User
+    try {
+      await signInUser(email, password);
+      toast.success("Sign In Successful.", {
+        style: {
+          border: "2px solid #866674",
+          padding: "16px",
+          color: "#F5F5F5",
+          background: "#502D3C",
+        },
+        iconTheme: {
+          primary: "#fdb71c",
+          secondary: "#F5F5F5",
+        },
+      });
+      reset();
+      navigate(location?.state || "/");
+    } catch {
+      toast.error("Invalid User.", {
+        style: {
+          border: "2px solid #866674",
+          padding: "16px",
+          color: "#F5F5F5",
+          background: "#502D3C",
+        },
+        iconTheme: {
+          primary: "#CD2728",
+          secondary: "#F5F5F5",
+        },
+      });
+    }
+  };
+
+  //Sign In with Google
+  const googleSignIn = async () => {
+    try {
+      const userInfo = await signInWithGoogle();
+      setAuthLoading(true);
+
+      const userData = {
+        uid: userInfo?.user?.uid,
+        email: userInfo?.user?.email,
+        status: "Not Verified",
+        join: new Date().toLocaleString(),
+      };
+
+      toast.success("Sign In Successful.", {
+        style: {
+          border: "2px solid #866674",
+          padding: "16px",
+          color: "#F5F5F5",
+          background: "#502D3C",
+        },
+        iconTheme: {
+          primary: "#fdb71c",
+          secondary: "#F5F5F5",
+        },
+      });
+      setAuthLoading(false);
+      navigate(location?.state || "/");
+    } catch {
+      toast.error("Sign In Failed, Try Again.", {
+        style: {
+          border: "2px solid #866674",
+          padding: "16px",
+          color: "#F5F5F5",
+          background: "#502D3C",
+        },
+        iconTheme: {
+          primary: "#CD2728",
+          secondary: "#F5F5F5",
+        },
+      });
+      setAuthLoading(false);
+    }
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen">
       <Container>
@@ -28,7 +123,7 @@ const SignInForm = () => {
               Sign in to access your account
             </p>
           </div>
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit(handleFormSubmit)}>
             <div className="space-y-4">
               {/* Email  */}
               <div className="max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem] w-full space-y-2">
@@ -37,7 +132,16 @@ const SignInForm = () => {
                   placeholder="Work Email Address"
                   type="email"
                   className="block w-full px-4 py-3 text-lightPrimary bg-mildPrimary border-2 border-lightPrimary rounded-md focus:outline-none placeholder:text-lightPrimary"
+                  {...register("email", {
+                    required: {
+                      value: true,
+                      message: "Email is required.",
+                    },
+                  })}
                 />
+                {errors.email && (
+                  <p className="text-red-500 italic">{errors.email?.message}</p>
+                )}
               </div>
               {/* Password  */}
               <div className="max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem] w-full space-y-2">
@@ -47,6 +151,16 @@ const SignInForm = () => {
                     placeholder="*********"
                     type={passVisible ? "text" : "password"}
                     className="block w-full px-4 py-3 text-lightPrimary bg-mildPrimary border-2 border-lightPrimary rounded-md focus:outline-none placeholder:text-lightPrimary"
+                    {...register("password", {
+                      required: {
+                        value: true,
+                        message: "Password is required.",
+                      },
+                      pattern: {
+                        value: /^(?=.*[A-Z])(?=.*[a-z]).{6,16}$/,
+                        message: "Invalid password.",
+                      },
+                    })}
                   />
                   <span
                     onClick={() => setPassVisible(!passVisible)}
@@ -55,18 +169,35 @@ const SignInForm = () => {
                     {passVisible ? <TbEyeCheck /> : <TbEyeCancel />}
                   </span>
                 </div>
+                {errors.password && (
+                  <p className="text-red-500 italic">
+                    {errors.password?.message}
+                  </p>
+                )}
               </div>
             </div>
 
-            <div>
-              <SubmitButton text="Sign In" />
+            {/* Sign In Button  */}
+            <div className="max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem] w-full">
+              <button
+                disabled={authLoading}
+                type="submit"
+                className="block w-full px-4 py-3 bg-secondary hover:bg-[#fdb71ccc] transition duration-200 text-base md:text-lg rounded text-common font-semibold"
+              >
+                {authLoading ? (
+                  <ImSpinner10 className="text-2xl text-common animate-spin mx-auto" />
+                ) : (
+                  "Sign In"
+                )}
+              </button>
             </div>
           </form>
-          <div className="space-y-1">
+          {/* Forget Password  */}
+          {/* <div className="space-y-1">
             <button className="text-xs hover:underline hover:text-rose-500 text-gray-400">
               Forgot password?
             </button>
-          </div>
+          </div> */}
           <div className="flex items-center pt-4 space-x-1">
             <div className="flex-1 h-px sm:w-16 bg-gray-400"></div>
             <p className="px-3 text-sm text-gray-400">
@@ -74,11 +205,20 @@ const SignInForm = () => {
             </p>
             <div className="flex-1 h-px sm:w-16 bg-gray-400"></div>
           </div>
-          <div className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-400 border-rounded cursor-pointer">
-            <FcGoogle size={32} />
-
-            <p className="text-common">Continue with Google</p>
-          </div>
+          <button
+            disabled={authLoading}
+            onClick={() => googleSignIn()}
+            className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-400 border-rounded cursor-pointer"
+          >
+            {authLoading ? (
+              <ImSpinner10 className="text-2xl text-secondary animate-spin mx-auto" />
+            ) : (
+              <>
+                <FcGoogle size={32} />
+                <p className="text-common">Continue with Google</p>
+              </>
+            )}
+          </button>
           <p className="px-6 text-sm text-center text-gray-400">
             Don&apos;t have an account?
             <Link to="/sign-up" className="hover:underline text-secondary ml-1">
