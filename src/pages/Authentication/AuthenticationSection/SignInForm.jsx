@@ -7,11 +7,13 @@ import { ImSpinner10 } from "react-icons/im";
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
+import useAxiosCommon from "../../../hooks/fetch/useAxiosCommon";
 
 const SignInForm = () => {
   const [passVisible, setPassVisible] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosCommon = useAxiosCommon();
   const {
     register,
     handleSubmit,
@@ -67,9 +69,18 @@ const SignInForm = () => {
       const userData = {
         uid: userInfo?.user?.uid,
         email: userInfo?.user?.email,
-        status: "Not Verified",
+        name: userInfo?.user?.displayName,
+        photoURL: userInfo?.user?.photoURL,
+        role: "Employee",
+        accountNumber: "Not Given",
+        salary: "Not Given",
+        designation: "Not Given",
+        isVerified: false,
         join: new Date().toLocaleString(),
       };
+
+      //if the user is new save the data in database
+      await axiosCommon.put("/staffs", userData);
 
       toast.success("Sign In Successful.", {
         style: {

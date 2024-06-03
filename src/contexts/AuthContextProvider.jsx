@@ -10,11 +10,13 @@ import {
 import PropTypes from "prop-types";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebase.config";
+import useAxiosCommon from "../hooks/fetch/useAxiosCommon";
 
 export const AuthContext = createContext(null);
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
+  const axiosCommon = useAxiosCommon();
 
   //Create User
   const createUser = (email, password) => {
@@ -52,13 +54,23 @@ const AuthContextProvider = ({ children }) => {
 
   //Observer On User
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
-      setAuthLoading(false);
+
+      if (currentUser) {
+        // get token and store client
+        const userInfo = { uid: currentUser.uid };
+        const { data } = await axiosCommon.post("/jwt", userInfo);
+        localStorage.setItem("access-token", data.token);
+        setAuthLoading(false);
+      } else {
+        localStorage.removeItem("access-token");
+        setAuthLoading(false);
+      }
     });
 
     return () => unsubscribe();
-  }, [user]);
+  }, [axiosCommon]);
 
   //pass all the auth value
   const authInfo = {

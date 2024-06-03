@@ -6,6 +6,8 @@ import ContactPage from "../pages/Contact/ContactPage";
 import SignInPage from "../pages/Authentication/SignInPage";
 import SignUpPage from "../pages/Authentication/SignUpPage";
 import GuestOnlyRoute from "./GuestOnlyRoute";
+import DashboardLayout from "../layouts/DashboardLayout";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,15 @@ const router = createBrowserRouter([
       <GuestOnlyRoute>
         <SignUpPage />
       </GuestOnlyRoute>
+    ),
+  },
+  {
+    path: "/dashboard",
+    errorElement: <ErrorLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
     ),
   },
 ]);
