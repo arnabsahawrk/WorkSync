@@ -9,7 +9,7 @@ export const useGetStaff = () => {
 
   const getStaff = async () => {
     try {
-      const { data } = await axiosSecure(`/staffs?uid=${user.uid}`);
+      const { data } = await axiosSecure(`/staff?uid=${user.uid}`);
       return data;
     } catch (err) {
       throw new Error(err.response.data.message || "Failed to fetch get staff");

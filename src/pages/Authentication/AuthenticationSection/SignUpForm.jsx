@@ -8,12 +8,12 @@ import useAuth from "../../../hooks/useAuth";
 import useStorage from "../../../hooks/useStorage";
 import toast from "react-hot-toast";
 import { ImSpinner10 } from "react-icons/im";
-import useAxiosCommon from "../../../hooks/fetch/useAxiosCommon";
+import { usePutStaffData } from "../../../hooks/query/usePut";
 
 const SignUpForm = () => {
   const [passVisible, setPassVisible] = useState(false);
   const navigate = useNavigate();
-  const axiosCommon = useAxiosCommon();
+  const staffAsync = usePutStaffData();
   const {
     register,
     handleSubmit,
@@ -30,6 +30,23 @@ const SignUpForm = () => {
   } = useAuth();
   const { storageLoading, Storage } = useStorage();
 
+  const designationArray = [
+    "Software Engineer",
+    "Project Manager",
+    "Marketing Specialist",
+    "Sales Manager",
+    "Product Designer",
+    "Other",
+  ];
+  // get a random salary digit 20000 to 100000
+  const randomSalary = Math.floor(Math.random() * (100000 - 20000 + 1)) + 20000;
+  // get a random account number
+  const randomAccountNumber = Math.floor(
+    Math.random() * (90489345844 - 20489345844 + 1) + 20489345844
+  );
+  //get a random designation
+  const randomDesignation = Math.floor(Math.random() * designationArray.length);
+
   //Authenticate New User
   const handleFormSubmit = async (e) => {
     //Take all the input
@@ -44,7 +61,6 @@ const SignUpForm = () => {
     try {
       const userInfo = await createUser(email, password);
       setAuthLoading(true);
-      console.log(userInfo);
 
       const userData = {
         uid: userInfo?.user?.uid,
@@ -57,10 +73,11 @@ const SignUpForm = () => {
         designation,
         isVerified: false,
         join: new Date().toLocaleString(),
+        update: false,
       };
 
       //save new user data in database
-      await axiosCommon.put("/staffs", userData);
+      staffAsync(userData);
 
       //Update Profile
       await updateUserProfile(name, photoURL);
@@ -116,15 +133,16 @@ const SignUpForm = () => {
         name: userInfo?.user?.displayName,
         photoURL: userInfo?.user?.photoURL,
         role: "Employee",
-        accountNumber: "Not Given",
-        salary: "Not Given",
-        designation: "Not Given",
+        accountNumber: randomAccountNumber,
+        salary: randomSalary,
+        designation: designationArray[randomDesignation],
         isVerified: false,
         join: new Date().toLocaleString(),
+        update: false,
       };
 
       //if the user is new save the data in database
-      await axiosCommon.put("/staffs", userData);
+      staffAsync(userData);
 
       toast.success("Sign In Successful.", {
         style: {
@@ -210,19 +228,14 @@ const SignUpForm = () => {
               </div>
               {/* Account No.  */}
               <div className="max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem] w-full space-y-2">
-                <label className="text-sm text-common">
-                  Bank Account Number
-                </label>
+                <label className="text-sm text-common">Account Number</label>
                 <input
+                  defaultValue={randomAccountNumber}
                   placeholder="Your account number"
                   type="number"
                   className="block w-full px-4 py-3 text-lightPrimary bg-mildPrimary border-2 border-lightPrimary rounded-md focus:outline-none placeholder:text-lightPrimary"
-                  {...register("accountNumber", {
-                    required: {
-                      value: true,
-                      message: "Required Field.",
-                    },
-                  })}
+                  {...register("accountNumber")}
+                  readOnly
                 />
                 {errors.accountNumber && (
                   <p className="text-red-500 italic">
@@ -234,37 +247,27 @@ const SignUpForm = () => {
               <div className="max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem] w-full space-y-2">
                 <label className="text-sm text-common">Salary</label>
                 <input
+                  defaultValue={randomSalary}
                   placeholder="Your salary amount"
                   type="number"
                   className="block w-full px-4 py-3 text-lightPrimary bg-mildPrimary border-2 border-lightPrimary rounded-md focus:outline-none placeholder:text-lightPrimary"
-                  {...register("salary", {
-                    required: {
-                      value: true,
-                      message: "Required Field.",
-                    },
-                  })}
+                  {...register("salary")}
+                  readOnly
                 />
-                {errors.salary && (
-                  <p className="text-red-500 italic">
-                    {errors.salary?.message}
-                  </p>
-                )}
               </div>
               {/* Designation  */}
               <div className="max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem] w-full space-y-2">
                 <label className="text-sm text-common">Your Designation</label>
                 <select
+                  defaultValue={designationArray[randomDesignation]}
                   className="block w-full px-4 py-3 text-lightPrimary bg-mildPrimary border-2 border-lightPrimary rounded-md focus:outline-none"
                   {...register("designation")}
                 >
-                  <option value="Software Engineer">Software Engineer</option>
-                  <option value="Project Manager">Project Manager</option>
-                  <option value="Marketing Specialist">
-                    Marketing Specialist
-                  </option>
-                  <option value="Sales Manager">Sales Manager</option>
-                  <option value="Product Designer">Product Designer</option>
-                  <option value="Other">Other</option>
+                  {designationArray.map((designation, idx) => (
+                    <option key={idx} value={designation}>
+                      {designation}
+                    </option>
+                  ))}
                 </select>
               </div>
               {/* Photo  */}

@@ -8,6 +8,9 @@ import SignUpPage from "../pages/Authentication/SignUpPage";
 import GuestOnlyRoute from "./GuestOnlyRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
+import ProfilePage from "../pages/Dashboard/Profile/ProfilePage";
+import WorkSheetPage from "../pages/Dashboard/WorkSheet/WorkSheetPage";
+import PaymentHistoryPage from "../pages/Dashboard/PaymentHistory/PaymentHistoryPage";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +54,32 @@ const router = createBrowserRouter([
         <DashboardLayout />
       </PrivateRoute>
     ),
+    children: [
+      {
+        index: true,
+        element: (
+          <PrivateRoute>
+            <ProfilePage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/work-sheet",
+        element: (
+          <PrivateRoute>
+            <WorkSheetPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/payment-history",
+        element: (
+          <PrivateRoute>
+            <PaymentHistoryPage />
+          </PrivateRoute>
+        ),
+      },
+    ],
   },
 ]);
 

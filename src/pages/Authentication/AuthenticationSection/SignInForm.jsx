@@ -7,13 +7,13 @@ import { ImSpinner10 } from "react-icons/im";
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
-import useAxiosCommon from "../../../hooks/fetch/useAxiosCommon";
+import { usePutStaffData } from "../../../hooks/query/usePut";
 
 const SignInForm = () => {
   const [passVisible, setPassVisible] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const axiosCommon = useAxiosCommon();
+  const staffAsync = usePutStaffData();
   const {
     register,
     handleSubmit,
@@ -22,6 +22,23 @@ const SignInForm = () => {
   } = useForm();
   const { authLoading, setAuthLoading, signInWithGoogle, signInUser } =
     useAuth();
+
+  const designationArray = [
+    "Software Engineer",
+    "Project Manager",
+    "Marketing Specialist",
+    "Sales Manager",
+    "Product Designer",
+    "Other",
+  ];
+  // get a random salary digit 20000 to 100000
+  const randomSalary = Math.floor(Math.random() * (100000 - 20000 + 1)) + 20000;
+  // get a random account number
+  const randomAccountNumber = Math.floor(
+    Math.random() * (90489345844 - 20489345844 + 1) + 20489345844
+  );
+  //get a random designation
+  const randomDesignation = Math.floor(Math.random() * designationArray.length);
 
   //Authenticate User
   const handleFormSubmit = async (e) => {
@@ -72,15 +89,16 @@ const SignInForm = () => {
         name: userInfo?.user?.displayName,
         photoURL: userInfo?.user?.photoURL,
         role: "Employee",
-        accountNumber: "Not Given",
-        salary: "Not Given",
-        designation: "Not Given",
+        accountNumber: randomAccountNumber,
+        salary: randomSalary,
+        designation: designationArray[randomDesignation],
         isVerified: false,
         join: new Date().toLocaleString(),
+        update: false,
       };
 
       //if the user is new save the data in database
-      await axiosCommon.put("/staffs", userData);
+      staffAsync(userData);
 
       toast.success("Sign In Successful.", {
         style: {
