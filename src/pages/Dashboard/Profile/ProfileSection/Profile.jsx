@@ -19,9 +19,6 @@ const Profile = () => {
               className="object-cover size-1/2 mx-auto rounded-full mb-5 border border-secondary dark:border-primary shadow-lg hover:shadow-sm transition duration-300"
             />
             <p>
-              Uid: <span className="font-medium text-sm">{staff?.uid}</span>
-            </p>
-            <p>
               Name: <span className="font-medium text-sm">{staff?.name}</span>
             </p>
             <p>

@@ -10,7 +10,7 @@ export const usePutStaffData = () => {
       const { data } = await axiosCommon.put("/staff", formData);
       return data;
     } catch (err) {
-      throw new Error(err.response.data.message || "Failed to fetch get staff");
+      throw new Error(err.response.data.message || "Failed to fetch put staff");
     }
   };
 

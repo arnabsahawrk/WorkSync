@@ -24,3 +24,26 @@ export const useGetStaff = () => {
 
   return { staff, staffIsLoading };
 };
+
+//get task data by uid
+export const useGetTasks = () => {
+  const { user, authLoading } = useAuth();
+  const axiosSecure = useAxiosSecure();
+
+  const getTasks = async () => {
+    try {
+      const { data } = await axiosSecure(`/tasks?uid=${user.uid}`);
+      return data;
+    } catch (err) {
+      throw new Error(err.response.data.message || "Failed to fetch get tasks");
+    }
+  };
+
+  const { data: tasks = [], isLoading: tasksIsLoading } = useQuery({
+    queryKey: ["tasks", user?.uid],
+    enabled: !!user?.uid && !authLoading,
+    queryFn: getTasks,
+  });
+
+  return { tasks, tasksIsLoading };
+};

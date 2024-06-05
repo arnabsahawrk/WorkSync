@@ -8,7 +8,7 @@ const axiosSecure = axios.create({
 });
 
 const useAxiosSecure = () => {
-  const { signOutUser } = useAuth();
+  const { signOutUser, setAuthLoading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,12 +33,13 @@ const useAxiosSecure = () => {
         ) {
           localStorage.removeItem("access-token");
           await signOutUser();
+          setAuthLoading(false);
           navigate("/sign-in");
         }
         return Promise.reject(err);
       }
     );
-  }, [signOutUser, navigate]);
+  }, [signOutUser, navigate, setAuthLoading]);
 
   return axiosSecure;
 };

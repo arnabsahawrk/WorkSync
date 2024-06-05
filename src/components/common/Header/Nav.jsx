@@ -5,6 +5,7 @@ import useAuth from "../../../hooks/useAuth";
 import Container from "../Others/Container";
 import { SlClose } from "react-icons/sl";
 import toast from "react-hot-toast";
+import { useGetStaff } from "../../../hooks/query/useGet";
 
 const Nav = () => {
   const [active, setActive] = useState(false);
@@ -83,6 +84,7 @@ const Nav = () => {
 
   const navigate = useNavigate();
   const { user, signOutUser } = useAuth();
+  const { staff } = useGetStaff();
   const [isOpen, setIsOpen] = useState(false);
 
   //Sign Out
@@ -154,7 +156,7 @@ const Nav = () => {
                   <img
                     className="rounded-full object-cover"
                     referrerPolicy="no-referrer"
-                    src={user?.photoURL}
+                    src={user?.photoURL || staff?.photoURL}
                     alt="profile"
                     height="30"
                     width="30"
