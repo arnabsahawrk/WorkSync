@@ -14,12 +14,14 @@ export const usePutStaffData = () => {
     }
   };
 
-  const { mutateAsync: staffAsync } = useMutation({
-    mutationFn: putStaff,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["staff"] });
-    },
-  });
+  const { mutateAsync: staffAsync, isPending: staffAsyncPending } = useMutation(
+    {
+      mutationFn: putStaff,
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["staff"] });
+      },
+    }
+  );
 
-  return staffAsync;
+  return { staffAsync, staffAsyncPending };
 };

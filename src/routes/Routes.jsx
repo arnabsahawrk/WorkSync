@@ -11,6 +11,8 @@ import PrivateRoute from "./PrivateRoute";
 import ProfilePage from "../pages/Dashboard/Profile/ProfilePage";
 import WorkSheetPage from "../pages/Dashboard/WorkSheet/WorkSheetPage";
 import PaymentHistoryPage from "../pages/Dashboard/PaymentHistory/PaymentHistoryPage";
+import EmployeeListPage from "../pages/Dashboard/EmployeeList/EmployeeListPage";
+import HrRoute from "./HrRoute";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +65,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      // Employee Routes
       {
         path: "/dashboard/work-sheet",
         element: (
@@ -76,6 +79,17 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <PaymentHistoryPage />
+          </PrivateRoute>
+        ),
+      },
+      // HR Routes
+      {
+        path: "/dashboard/employee-list",
+        element: (
+          <PrivateRoute>
+            <HrRoute>
+              <EmployeeListPage />
+            </HrRoute>
           </PrivateRoute>
         ),
       },

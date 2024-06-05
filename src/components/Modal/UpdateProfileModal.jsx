@@ -13,9 +13,9 @@ const UpdateProfileModal = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
   const { staff, staffIsLoading } = useGetStaff();
-  const staffAsync = usePutStaffData();
+  const { staffAsync, staffAsyncPending } = usePutStaffData();
 
-  const { authLoading, setUser, setAuthLoading, updateUserProfile } = useAuth();
+  const { authLoading, setUser, updateUserProfile } = useAuth();
   const { storageLoading, Storage } = useStorage();
 
   //Input Form
@@ -39,8 +39,6 @@ const UpdateProfileModal = () => {
 
     //Update User Data
     try {
-      setAuthLoading(true);
-
       const userData = {
         uid: staff?.uid,
         name: name,
@@ -72,8 +70,6 @@ const UpdateProfileModal = () => {
         },
       });
 
-      setAuthLoading(false);
-
       reset();
       handleOpen();
     } catch {
@@ -89,7 +85,6 @@ const UpdateProfileModal = () => {
           secondary: "#F5F5F5",
         },
       });
-      setAuthLoading(false);
     }
   };
 
@@ -182,11 +177,11 @@ const UpdateProfileModal = () => {
             {/* Update Button  */}
             <div className="max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem] w-full">
               <button
-                disabled={authLoading || storageLoading}
+                disabled={authLoading || storageLoading || staffAsyncPending}
                 type="submit"
                 className="block w-full px-4 py-1 bg-secondary hover:bg-[#fdb71ccc] transition duration-200 text-base md:text-lg rounded text-common font-semibold"
               >
-                {authLoading || storageLoading ? (
+                {authLoading || storageLoading || staffAsyncPending ? (
                   <ImSpinner10 className="text-2xl text-common animate-spin mx-auto" />
                 ) : (
                   "Update"

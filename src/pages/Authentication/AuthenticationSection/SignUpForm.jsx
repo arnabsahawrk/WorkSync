@@ -13,7 +13,7 @@ import { usePutStaffData } from "../../../hooks/query/usePut";
 const SignUpForm = () => {
   const [passVisible, setPassVisible] = useState(false);
   const navigate = useNavigate();
-  const staffAsync = usePutStaffData();
+  const { staffAsync, staffAsyncPending } = usePutStaffData();
   const {
     register,
     handleSubmit,
@@ -359,11 +359,11 @@ const SignUpForm = () => {
             {/* Sign Up Button  */}
             <div className="max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem] w-full">
               <button
-                disabled={authLoading || storageLoading}
+                disabled={authLoading || storageLoading || staffAsyncPending}
                 type="submit"
                 className="block w-full px-4 py-3 bg-secondary hover:bg-[#fdb71ccc] transition duration-200 text-base md:text-lg rounded text-common font-semibold"
               >
-                {authLoading || storageLoading ? (
+                {authLoading || storageLoading || staffAsyncPending ? (
                   <ImSpinner10 className="text-2xl text-common animate-spin mx-auto" />
                 ) : (
                   "Sign Up"
@@ -379,11 +379,11 @@ const SignUpForm = () => {
             <div className="flex-1 h-px sm:w-16 bg-gray-400"></div>
           </div>
           <button
-            disabled={authLoading || storageLoading}
+            disabled={authLoading || storageLoading || staffAsyncPending}
             onClick={() => googleSignIn()}
             className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-400 border-rounded cursor-pointer"
           >
-            {authLoading || storageLoading ? (
+            {authLoading || storageLoading || staffAsyncPending ? (
               <ImSpinner10 className="text-2xl text-secondary animate-spin mx-auto" />
             ) : (
               <>

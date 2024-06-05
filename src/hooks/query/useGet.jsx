@@ -18,7 +18,8 @@ export const useGetStaff = () => {
 
   const { data: staff = {}, isLoading: staffIsLoading } = useQuery({
     queryKey: ["staff", user?.uid],
-    enabled: !!user?.uid && !authLoading,
+    enabled:
+      !!user?.uid && !authLoading && !!localStorage.getItem("access-token"),
     queryFn: getStaff,
   });
 
@@ -41,7 +42,8 @@ export const useGetTasks = () => {
 
   const { data: tasks = [], isLoading: tasksIsLoading } = useQuery({
     queryKey: ["tasks", user?.uid],
-    enabled: !!user?.uid && !authLoading,
+    enabled:
+      !!user?.uid && !authLoading && !!localStorage.getItem("access-token"),
     queryFn: getTasks,
   });
 
