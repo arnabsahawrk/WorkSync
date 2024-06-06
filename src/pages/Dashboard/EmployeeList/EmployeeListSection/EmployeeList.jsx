@@ -9,6 +9,7 @@ import CommonSpinner from "../../../../components/common/Spinner/CommonSpinner";
 import { useEffect } from "react";
 import { LiaRupeeSignSolid } from "react-icons/lia";
 import { Link } from "react-router-dom";
+import CheckOutModal from "../../../../components/Modal/CheckOutModal";
 
 const EmployeeList = () => {
   const { employees, employeesIsLoading, employeesRefetch } = useGetEmployees();
@@ -39,22 +40,13 @@ const EmployeeList = () => {
       header: "Salary",
       accessorKey: "salary",
       cell: (e) => (
-        <p className="space-y-1">
-          <span className="flex justify-center items-center gap-1">
+        <div className="space-y-1">
+          <p className="flex justify-center items-center gap-1">
             {e.row.original.salary}
             <LiaRupeeSignSolid />
-          </span>
-          <button
-            disabled={!e.row.original.isVerified}
-            className={`rounded p-1 ${
-              e.row.original.isVerified
-                ? "bg-secondary"
-                : "bg-[#fdb71c80] text-[#F5F5F5CC] cursor-not-allowed"
-            }`}
-          >
-            Pay
-          </button>
-        </p>
+          </p>
+          <CheckOutModal staff={e.row.original} />
+        </div>
       ),
     },
     {
