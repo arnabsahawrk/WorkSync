@@ -18,7 +18,7 @@ export const usePutStaffData = () => {
     {
       mutationFn: putStaff,
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["staff"] });
+        queryClient.invalidateQueries({ queryKey: ["staff", "employees"] });
       },
     }
   );

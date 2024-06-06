@@ -154,12 +154,10 @@ const Nav = () => {
                 <div className={`${user ? "grid" : "hidden"}`}>
                   {/* Avatar */}
                   <img
-                    className="rounded-full object-cover"
+                    className="rounded-full object-cover size-8"
                     referrerPolicy="no-referrer"
                     src={user?.photoURL || staff?.photoURL}
                     alt="profile"
-                    height="30"
-                    width="30"
                   />
                 </div>
                 {isOpen ? (

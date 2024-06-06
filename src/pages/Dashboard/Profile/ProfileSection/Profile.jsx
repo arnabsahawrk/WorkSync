@@ -16,7 +16,7 @@ const Profile = () => {
             <img
               src={staff?.photoURL}
               alt={staff?.name}
-              className="object-cover size-1/2 mx-auto rounded-full mb-5 border border-secondary dark:border-primary shadow-lg hover:shadow-sm transition duration-300"
+              className="object-cover size-52 mx-auto rounded-full mb-5 border border-secondary dark:border-primary shadow-lg hover:shadow-sm transition duration-300"
             />
             <p>
               Name: <span className="font-medium text-sm">{staff?.name}</span>

@@ -49,3 +49,30 @@ export const useGetTasks = () => {
 
   return { tasks, tasksIsLoading };
 };
+
+//get employee list for HR
+export const useGetEmployees = () => {
+  const axiosSecure = useAxiosSecure();
+
+  const getEmployees = async () => {
+    try {
+      const { data } = await axiosSecure("/employees");
+      return data;
+    } catch (err) {
+      throw new Error(
+        err.response.data.message || "Failed to fetch get employees"
+      );
+    }
+  };
+
+  const {
+    data: employees = [],
+    isLoading: employeesIsLoading,
+    refetch: employeesRefetch,
+  } = useQuery({
+    queryKey: ["employees"],
+    queryFn: getEmployees,
+  });
+
+  return { employees, employeesIsLoading, employeesRefetch };
+};
