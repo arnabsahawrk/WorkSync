@@ -5,6 +5,7 @@ import { useGetStaff } from "../../../../hooks/query/useGet";
 
 const Profile = () => {
   const { staff, staffIsLoading } = useGetStaff();
+
   return (
     <div className="min-w-screen min-h-screen flex justify-center items-center">
       <Container className="max-w-md bg-darkPrimaryBg dark:bg-primaryBg min-h-[300px] rounded-md">

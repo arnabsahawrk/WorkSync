@@ -34,7 +34,7 @@ const CommonTable = ({ data, columns }) => {
   });
 
   return (
-    <div className="w-full max-w-3xl mx-auto mt-10 overflow-auto bg-primary rounded-md border-2 border-darkPrimary dark:border-primaryBg">
+    <div className="w-full max-w-4xl mx-auto mt-10 overflow-auto bg-primary rounded-md border-2 border-darkPrimary dark:border-primaryBg">
       <div className="py-4 px-8">
         <input
           type="text"

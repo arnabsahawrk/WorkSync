@@ -9,16 +9,13 @@ const WorkSheet = () => {
 
   const tasksColumn = [
     {
-      header: "No.",
-      accessorKey: "id",
-    },
-    {
       header: "Task",
       accessorKey: "task",
     },
     {
       header: "Time",
       accessorKey: "hours",
+      cell: (e) => `${e.row.original.hours}h`,
     },
     {
       header: "Date",

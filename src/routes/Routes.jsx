@@ -13,6 +13,7 @@ import WorkSheetPage from "../pages/Dashboard/WorkSheet/WorkSheetPage";
 import PaymentHistoryPage from "../pages/Dashboard/PaymentHistory/PaymentHistoryPage";
 import EmployeeListPage from "../pages/Dashboard/EmployeeList/EmployeeListPage";
 import HrRoute from "./HrRoute";
+import EmployeeDetailsPage from "../pages/Dashboard/EmployeeDetails/EmployeeDetailsPage";
 
 const router = createBrowserRouter([
   {
@@ -89,6 +90,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <HrRoute>
               <EmployeeListPage />
+            </HrRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/employee-list/details/:slug",
+        element: (
+          <PrivateRoute>
+            <HrRoute>
+              <EmployeeDetailsPage />
             </HrRoute>
           </PrivateRoute>
         ),

@@ -8,6 +8,7 @@ import { ImSpinner10 } from "react-icons/im";
 import CommonSpinner from "../../../../components/common/Spinner/CommonSpinner";
 import { useEffect } from "react";
 import { LiaRupeeSignSolid } from "react-icons/lia";
+import { Link } from "react-router-dom";
 
 const EmployeeList = () => {
   const { employees, employeesIsLoading, employeesRefetch } = useGetEmployees();
@@ -90,10 +91,13 @@ const EmployeeList = () => {
     },
     {
       header: " ",
-      cell: () => (
-        <button className="bg-white text-secondary font-bold p-1 rounded">
+      cell: (e) => (
+        <Link
+          to={`/dashboard/employee-list/details/${e.row.original.uid}`}
+          className="bg-white text-secondary font-bold p-1 rounded"
+        >
           Details
-        </button>
+        </Link>
       ),
     },
   ];
