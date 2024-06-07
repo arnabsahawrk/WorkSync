@@ -14,6 +14,7 @@ import PaymentHistoryPage from "../pages/Dashboard/PaymentHistory/PaymentHistory
 import EmployeeListPage from "../pages/Dashboard/EmployeeList/EmployeeListPage";
 import HrRoute from "./HrRoute";
 import EmployeeDetailsPage from "../pages/Dashboard/EmployeeDetails/EmployeeDetailsPage";
+import ProgressPage from "../pages/Dashboard/Progress/ProgressPage";
 
 const router = createBrowserRouter([
   {
@@ -100,6 +101,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <HrRoute>
               <EmployeeDetailsPage />
+            </HrRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/progress",
+        element: (
+          <PrivateRoute>
+            <HrRoute>
+              <ProgressPage />
             </HrRoute>
           </PrivateRoute>
         ),

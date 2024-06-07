@@ -4,10 +4,30 @@ import Container from "../../../components/common/Others/Container";
 import CommonInput from "../../../components/common/Inputs/CommonInput";
 import CommonTextArea from "../../../components/common/Inputs/CommonTextArea";
 import SubmitButton from "../../../components/common/Buttons/SubmitButton";
+import toast from "react-hot-toast";
 
 const ContactForm = () => {
   const [params] = useSearchParams();
   const email = params.get("email");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    toast.success("We'll be in touch with you soon.", {
+      style: {
+        border: "2px solid #866674",
+        padding: "16px",
+        color: "#F5F5F5",
+        background: "#502D3C",
+      },
+      iconTheme: {
+        primary: "#fdb71c",
+        secondary: "#F5F5F5",
+      },
+    });
+
+    e.target.reset();
+  };
   return (
     <section className="bg-primary">
       <Container className="space-y-5 md:space-y-7 py-10">
@@ -20,7 +40,10 @@ const ContactForm = () => {
           </p>
         </div>
         {/* //Form  */}
-        <form className="px-10 flex flex-col justify-center items-center gap-3">
+        <form
+          onSubmit={handleSubmit}
+          className="px-10 flex flex-col justify-center items-center gap-3"
+        >
           {/* Email  */}
           <CommonInput
             value={email}

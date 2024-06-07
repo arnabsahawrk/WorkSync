@@ -83,25 +83,25 @@ export const useGetEmployeeDetails = (uid) => {
   console.log(uid);
 };
 
-//get salary list
-// export const useGetSalaries = () => {
-//   const axiosSecure = useAxiosSecure();
+// get salary list
+export const useGetAllTasks = () => {
+  const axiosSecure = useAxiosSecure();
 
-//   const getSalaries = async () => {
-//     try {
-//       const { data } = await axiosSecure("/salaries");
-//       return data;
-//     } catch (err) {
-//       throw new Error(
-//         err.response.data.message || "Failed to fetch get salaries"
-//       );
-//     }
-//   };
+  const getAllTasks = async () => {
+    try {
+      const { data } = await axiosSecure("/allTasks");
+      return data;
+    } catch (err) {
+      throw new Error(
+        err.response.data.message || "Failed to fetch get all tasks"
+      );
+    }
+  };
 
-//   const { data: salaries = [], isLoading: salariesIsLoading } = useQuery({
-//     queryKey: ["salaries"],
-//     queryFn: getSalaries,
-//   });
+  const { data: allTasks = [], isLoading: allTasksIsLoading } = useQuery({
+    queryKey: ["allTasks"],
+    queryFn: getAllTasks,
+  });
 
-//   return { salaries, salariesIsLoading };
-// };
+  return { allTasks, allTasksIsLoading };
+};

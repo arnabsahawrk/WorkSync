@@ -27,11 +27,12 @@ const WorkSheetForm = () => {
     const { task, hours } = e;
 
     const workData = {
-      uid: staff?.uid,
+      ...staff,
       task: task,
       hours: parseFloat(hours),
       date: startDate,
     };
+    delete workData._id;
 
     try {
       await taskAsync(workData);
