@@ -105,3 +105,29 @@ export const useGetAllTasks = () => {
 
   return { allTasks, allTasksIsLoading };
 };
+
+//get payment history
+export const useGetPaymentHistory = () => {
+  const { user, authLoading } = useAuth();
+  const axiosSecure = useAxiosSecure();
+
+  const getPaymentHistory = async () => {
+    try {
+      const { data } = await axiosSecure(`/paymentHistory?uid=${user.uid}`);
+      return data;
+    } catch (err) {
+      throw new Error(
+        err.response.data.message || "Failed to fetch get Payment History"
+      );
+    }
+  };
+
+  const { data: history = [], isLoading: historyIsLoading } = useQuery({
+    queryKey: ["history", user?.uid],
+    enabled:
+      !!user?.uid && !authLoading && !!localStorage.getItem("access-token"),
+    queryFn: getPaymentHistory,
+  });
+
+  return { history, historyIsLoading };
+};

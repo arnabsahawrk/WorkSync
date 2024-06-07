@@ -20,10 +20,10 @@ const EmployeeList = () => {
   }, [employeesRefetch, staffAsyncPending]);
 
   const columns = [
-    // {
-    //   header: "No.",
-    //   accessorKey: "id",
-    // },
+    {
+      header: "No.",
+      accessorKey: "id",
+    },
     {
       header: "Name",
       accessorKey: "name",

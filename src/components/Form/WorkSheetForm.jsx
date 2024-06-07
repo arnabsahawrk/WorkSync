@@ -72,7 +72,7 @@ const WorkSheetForm = () => {
         <CommonSpinner />
       ) : (
         <form
-          className="w-full max-w-md space-y-6 p-6 rounded-md sm:p-10 bg-primary border-2 border-darkPrimary dark:border-primaryBg"
+          className="w-full max-w-md space-y-6 p-6 rounded-md sm:p-10 bg-primary border-2 border-darkPrimary dark:border-primaryBg mt-8"
           onSubmit={handleSubmit(handleFormSubmit)}
         >
           {/* Tasks  */}

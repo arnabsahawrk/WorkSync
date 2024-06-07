@@ -1,5 +1,6 @@
 import WorkSheetForm from "../../../../components/Form/WorkSheetForm";
 import CommonTable from "../../../../components/Table/CommonTable";
+import Empty from "../../../../components/common/Empty/Empty";
 import Container from "../../../../components/common/Others/Container";
 import CommonSpinner from "../../../../components/common/Spinner/CommonSpinner";
 import { useGetTasks } from "../../../../hooks/query/useGet";
@@ -32,8 +33,10 @@ const WorkSheet = () => {
       {/* <WorkSheetTable /> */}
       {tasksIsLoading ? (
         <CommonSpinner />
+      ) : tasks.length > 0 ? (
+        <CommonTable data={tasks} columns={tasksColumn} />
       ) : (
-        tasks.length > 0 && <CommonTable data={tasks} columns={tasksColumn} />
+        <Empty text="No work sheet accomplish yet" />
       )}
     </Container>
   );

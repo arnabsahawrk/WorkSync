@@ -5,6 +5,7 @@ import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import { IoIosTime } from "react-icons/io";
 import CommonSpinner from "../../../../components/common/Spinner/CommonSpinner";
 import CommonTable from "../../../../components/Table/CommonTable";
+import Empty from "../../../../components/common/Empty/Empty";
 
 const Progress = () => {
   const { allTasks, allTasksIsLoading } = useGetAllTasks();
@@ -76,10 +77,10 @@ const Progress = () => {
       {/* Tasks Table  */}
       {allTasksIsLoading ? (
         <CommonSpinner />
+      ) : allTasks.allTasks.length > 0 ? (
+        <CommonTable data={allTasks.allTasks} columns={tasksColumn} />
       ) : (
-        allTasks.allTasks.length > 0 && (
-          <CommonTable data={allTasks.allTasks} columns={tasksColumn} />
-        )
+        <Empty text="No work sheet accomplish yet" />
       )}
     </Container>
   );

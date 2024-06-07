@@ -70,7 +70,9 @@ const CommonTable = ({ data, columns }) => {
                         className={`${
                           sorting.length ||
                           header.column.columnDef.header === " " ||
-                          header.column.columnDef.header === "Status"
+                          header.column.columnDef.header === "Status" ||
+                          header.column.columnDef.header === "Transaction Id" ||
+                          header.column.columnDef.header === "Account Number"
                             ? "invisible"
                             : "visible"
                         }`}
