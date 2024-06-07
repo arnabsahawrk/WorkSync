@@ -42,7 +42,7 @@ const Progress = () => {
       {/* Statistics  */}
       <div className="flex flex-col md:flex-row gap-5 justify-center items-center mt-10">
         {/* Total Tasks */}
-        <div className="max-w-[250px] h-[150px] size-full rounded-lg bg-rareColor flex flex-col justify-center items-center gap-3 text-common font-bold text-center">
+        <div className="max-w-[250px] h-[150px] size-full rounded-lg bg-rareColor border border-primaryBg flex flex-col justify-center items-center gap-3 text-common font-bold text-center">
           <p className="text-4xl">
             <IoCheckmarkDoneCircle />
           </p>
@@ -58,7 +58,7 @@ const Progress = () => {
           </div>
         </div>
         {/* Total Hours */}
-        <div className="max-w-[250px] h-[150px] size-full rounded-lg bg-secondary flex flex-col justify-center items-center gap-3 text-common font-bold text-center">
+        <div className="max-w-[250px] h-[150px] size-full rounded-lg bg-secondary border border-primaryBg flex flex-col justify-center items-center gap-3 text-common font-bold text-center">
           <p className="text-4xl">
             <IoIosTime />
           </p>

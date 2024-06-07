@@ -79,8 +79,26 @@ export const useGetEmployees = () => {
 
 //get single employee list for HR only
 export const useGetEmployeeDetails = (uid) => {
-  // const axiosSecure = useAxiosSecure();
-  console.log(uid);
+  const axiosSecure = useAxiosSecure();
+
+  const getEmployeeDetails = async () => {
+    try {
+      const { data } = await axiosSecure(`/employeeDetails?uid=${uid}`);
+      return data;
+    } catch (err) {
+      throw new Error(
+        err.response.data.message || "Failed to fetch get employee details"
+      );
+    }
+  };
+
+  const { data: employeeDetails = [], isLoading: employeeDetailsIsLoading } =
+    useQuery({
+      queryKey: ["employeeDetails"],
+      queryFn: getEmployeeDetails,
+    });
+
+  return { employeeDetails, employeeDetailsIsLoading };
 };
 
 // get salary list

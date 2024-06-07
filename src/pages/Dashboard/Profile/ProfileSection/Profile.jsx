@@ -1,3 +1,4 @@
+import { LiaRupeeSignSolid } from "react-icons/lia";
 import UpdateProfileModal from "../../../../components/Modal/UpdateProfileModal";
 import Container from "../../../../components/common/Others/Container";
 import CommonSpinner from "../../../../components/common/Spinner/CommonSpinner";
@@ -35,9 +36,10 @@ const Profile = () => {
                 {staff?.accountNumber}
               </span>
             </p>
-            <p>
-              Salary:{" "}
+            <p className="flex items-center gap-1 justify-center">
+              Salary:
               <span className="font-medium text-sm">{staff?.salary}</span>
+              <LiaRupeeSignSolid />
             </p>
             <p>
               Designation:
