@@ -45,7 +45,11 @@ const EmployeeList = () => {
             {e.row.original.salary}
             <LiaRupeeSignSolid />
           </p>
-          <CheckOutModal staff={e.row.original} />
+          {e.row.original.isFired ? (
+            <p className="text-red-400 font-bold">Fired</p>
+          ) : (
+            <CheckOutModal staff={e.row.original} />
+          )}
         </div>
       ),
     },
@@ -55,6 +59,8 @@ const EmployeeList = () => {
         <>
           {staffAsyncPending ? (
             <ImSpinner10 className="animate-spin mx-auto" />
+          ) : e.row.original.isFired ? (
+            <p className="text-red-400 font-bold">Fired</p>
           ) : (
             <button
               disabled={staffAsyncPending}

@@ -17,6 +17,7 @@ import EmployeeDetailsPage from "../pages/Dashboard/EmployeeDetails/EmployeeDeta
 import ProgressPage from "../pages/Dashboard/Progress/ProgressPage";
 import AdminRoute from "./AdminRoute";
 import AllEmployeeListPage from "../pages/Dashboard/AllEmployeeList/AllEmployeeListPage";
+import FiredRoute from "./FiredRoute";
 
 const router = createBrowserRouter([
   {
@@ -57,7 +58,9 @@ const router = createBrowserRouter([
     errorElement: <ErrorLayout />,
     element: (
       <PrivateRoute>
-        <DashboardLayout />
+        <FiredRoute>
+          <DashboardLayout />
+        </FiredRoute>
       </PrivateRoute>
     ),
     children: [
@@ -65,7 +68,9 @@ const router = createBrowserRouter([
         index: true,
         element: (
           <PrivateRoute>
-            <ProfilePage />
+            <FiredRoute>
+              <ProfilePage />
+            </FiredRoute>
           </PrivateRoute>
         ),
       },
@@ -74,7 +79,9 @@ const router = createBrowserRouter([
         path: "/dashboard/work-sheet",
         element: (
           <PrivateRoute>
-            <WorkSheetPage />
+            <FiredRoute>
+              <WorkSheetPage />
+            </FiredRoute>
           </PrivateRoute>
         ),
       },
@@ -82,7 +89,9 @@ const router = createBrowserRouter([
         path: "/dashboard/payment-history",
         element: (
           <PrivateRoute>
-            <PaymentHistoryPage />
+            <FiredRoute>
+              <PaymentHistoryPage />
+            </FiredRoute>
           </PrivateRoute>
         ),
       },
@@ -91,9 +100,11 @@ const router = createBrowserRouter([
         path: "/dashboard/employee-list",
         element: (
           <PrivateRoute>
-            <HrRoute>
-              <EmployeeListPage />
-            </HrRoute>
+            <FiredRoute>
+              <HrRoute>
+                <EmployeeListPage />
+              </HrRoute>
+            </FiredRoute>
           </PrivateRoute>
         ),
       },
@@ -101,9 +112,11 @@ const router = createBrowserRouter([
         path: "/dashboard/employee-list/details/:slug",
         element: (
           <PrivateRoute>
-            <HrRoute>
-              <EmployeeDetailsPage />
-            </HrRoute>
+            <FiredRoute>
+              <HrRoute>
+                <EmployeeDetailsPage />
+              </HrRoute>
+            </FiredRoute>
           </PrivateRoute>
         ),
       },
@@ -111,9 +124,11 @@ const router = createBrowserRouter([
         path: "/dashboard/progress",
         element: (
           <PrivateRoute>
-            <HrRoute>
-              <ProgressPage />
-            </HrRoute>
+            <FiredRoute>
+              <HrRoute>
+                <ProgressPage />
+              </HrRoute>
+            </FiredRoute>
           </PrivateRoute>
         ),
       },
