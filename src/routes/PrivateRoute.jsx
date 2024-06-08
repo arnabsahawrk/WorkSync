@@ -1,4 +1,4 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import useAuth from "../hooks/useAuth";
 import AuthSpinner from "../components/common/Spinner/AuthSpinner";
@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 
 const PrivateRoute = ({ children }) => {
   const { user, authLoading } = useAuth();
-  const location = useLocation();
 
   if (authLoading) return <AuthSpinner />;
   else if (user) return children;
@@ -24,7 +23,7 @@ const PrivateRoute = ({ children }) => {
       },
     });
 
-  return <Navigate to="/sign-in" state={location.pathname} replace={true} />;
+  return <Navigate to="/sign-in" />;
 };
 
 PrivateRoute.propTypes = {
