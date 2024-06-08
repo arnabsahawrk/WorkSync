@@ -59,8 +59,13 @@ const SalaryIncreaseModal = ({ staff, staffAsync, staffAsyncPending }) => {
     <div>
       {
         <button
+          disabled={staffAsyncPending || staff?.isFired}
           onClick={handleOpen}
-          className="bg-secondary p-1 rounded text-xs"
+          className={`p-1 rounded text-xs ${
+            staff?.isFired
+              ? "bg-[#fdb71c80] text-[#F5F5F5CC] cursor-not-allowed"
+              : "bg-secondary text-common"
+          }`}
         >
           {staffAsyncPending ? (
             <ImSpinner10 className="text-2xl text-common animate-spin mx-auto" />

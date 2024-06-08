@@ -5,11 +5,14 @@ import CommonSpinner from "../../../../components/common/Spinner/CommonSpinner";
 import { useGetVerifiedEmployees } from "../../../../hooks/query/useGet";
 import Swal from "sweetalert2";
 import { usePutStaffData } from "../../../../hooks/query/usePut";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ImSpinner10 } from "react-icons/im";
 import SalaryIncreaseModal from "../../../../components/Modal/SalaryIncreaseModal";
+import AllEmployeeListCard from "../../../../components/Card/AllEmployeeListCard";
 
 const AllEmployeeList = () => {
+  const [view, setView] = useState(true);
+
   const {
     verifiedEmployees,
     verifiedEmployeesIsLoading,
@@ -131,9 +134,13 @@ const AllEmployeeList = () => {
               <ImSpinner10 className="animate-spin mx-auto" />
             ) : (
               <button
-                disabled={staffAsyncPending}
+                disabled={staffAsyncPending || e.row.original.isFired}
                 onClick={() => handleHR(e.row.original.uid)}
-                className="bg-secondary p-1 rounded text-xs"
+                className={`p-1 rounded text-xs ${
+                  e.row.original.isFired
+                    ? "bg-[#fdb71c80] text-[#F5F5F5CC] cursor-not-allowed"
+                    : "bg-secondary"
+                }`}
               >
                 Make HR
               </button>
@@ -169,10 +176,35 @@ const AllEmployeeList = () => {
       <p className="text-darkPrimary dark:text-primaryBg font-bold text-3xl md:text-4xl text-center underline">
         Verified Employee List
       </p>
+      {/* View Button  */}
+      <p className="text-center mt-10">
+        <button
+          onClick={() => setView(!view)}
+          className="px-4 py-2 text-common bg-primary dark:bg-secondary rounded-md hover:scale-95 transition duration-300 font-bold"
+        >
+          {view ? "Card View" : "Table View"}
+        </button>
+      </p>
+      {/* Table or Card View  */}
       {verifiedEmployeesIsLoading ? (
         <CommonSpinner />
-      ) : (
+      ) : view ? (
+        //Table View
         <CommonTable data={verifiedEmployees} columns={columns} />
+      ) : (
+        //Card View
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mt-10">
+          {verifiedEmployees?.map((employee) => (
+            <AllEmployeeListCard
+              key={employee?.uid}
+              employee={employee}
+              staffAsync={staffAsync}
+              staffAsyncPending={staffAsyncPending}
+              handleHR={handleHR}
+              handleFire={handleFire}
+            />
+          ))}
+        </div>
       )}
     </Container>
   );
