@@ -149,3 +149,34 @@ export const useGetPaymentHistory = () => {
 
   return { history, historyIsLoading };
 };
+
+//get verified employee list for Admin
+export const useGetVerifiedEmployees = () => {
+  const axiosSecure = useAxiosSecure();
+
+  const getVerifiedEmployees = async () => {
+    try {
+      const { data } = await axiosSecure("/verifiedEmployees");
+      return data;
+    } catch (err) {
+      throw new Error(
+        err.response.data.message || "Failed to fetch get verified employees"
+      );
+    }
+  };
+
+  const {
+    data: verifiedEmployees = [],
+    isLoading: verifiedEmployeesIsLoading,
+    refetch: verifiedEmployeesRefetch,
+  } = useQuery({
+    queryKey: ["verifiedEmployees"],
+    queryFn: getVerifiedEmployees,
+  });
+
+  return {
+    verifiedEmployees,
+    verifiedEmployeesIsLoading,
+    verifiedEmployeesRefetch,
+  };
+};

@@ -46,6 +46,7 @@ const SignInForm = () => {
 
     //Login New User
     try {
+      setAuthLoading(true);
       await signInUser(email, password);
       toast.success("Sign In Successful.", {
         style: {
@@ -59,6 +60,7 @@ const SignInForm = () => {
           secondary: "#F5F5F5",
         },
       });
+      setAuthLoading(false);
       reset();
       navigate(location?.state || "/");
     } catch {
@@ -74,6 +76,7 @@ const SignInForm = () => {
           secondary: "#F5F5F5",
         },
       });
+      setAuthLoading(false);
     }
   };
 

@@ -51,7 +51,11 @@ const CommonTable = ({ data, columns }) => {
               {headerGroup.headers.map((header, index) => (
                 <th
                   key={index}
-                  onClick={header.column.getToggleSortingHandler()}
+                  onClick={
+                    header.column.columnDef.header === "Role"
+                      ? null
+                      : header.column.getToggleSortingHandler()
+                  }
                   className="border-y border-lightPrimary p-4"
                 >
                   {header.isPlaceholder ? null : (
@@ -72,7 +76,8 @@ const CommonTable = ({ data, columns }) => {
                           header.column.columnDef.header === " " ||
                           header.column.columnDef.header === "Status" ||
                           header.column.columnDef.header === "Transaction Id" ||
-                          header.column.columnDef.header === "Account Number"
+                          header.column.columnDef.header === "Account Number" ||
+                          header.column.columnDef.header === "Role"
                             ? "invisible"
                             : "visible"
                         }`}

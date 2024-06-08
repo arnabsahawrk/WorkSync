@@ -29,14 +29,18 @@ const Profile = () => {
             <p>
               Role: <span className="font-medium text-sm">{staff?.role}</span>
             </p>
-            <p>
+            <p className={`${staff?.role === "Admin" ? "hidden" : "block"}`}>
               Account Number:
               <span className="font-medium text-sm">
                 {" "}
                 {staff?.accountNumber}
               </span>
             </p>
-            <p className="flex items-center gap-1 justify-center">
+            <p
+              className={`flex items-center gap-1 justify-center ${
+                staff?.role === "Admin" ? "hidden" : "block"
+              }`}
+            >
               Salary:
               <span className="font-medium text-sm">{staff?.salary}</span>
               <LiaRupeeSignSolid />
@@ -45,13 +49,13 @@ const Profile = () => {
               Designation:
               <span className="font-medium text-sm"> {staff?.designation}</span>
             </p>
-            <p>
+            <p className={`${staff?.role === "Admin" ? "hidden" : "block"}`}>
               Status:
               <span className="font-medium text-sm">
                 {staff?.isVerified ? " Verified" : " Not Verified"}
               </span>
             </p>
-            <p>
+            <p className={`${staff?.role === "Admin" ? "hidden" : "block"}`}>
               Join: <span className="font-medium text-sm">{staff?.join}</span>
             </p>
             <UpdateProfileModal />

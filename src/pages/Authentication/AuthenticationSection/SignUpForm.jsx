@@ -61,6 +61,13 @@ const SignUpForm = () => {
     try {
       const userInfo = await createUser(email, password);
       setAuthLoading(true);
+      //Set the value according to role
+      let totalSalary = parseFloat(salary);
+      let verifiedValue = false;
+      if (role === "HR") {
+        totalSalary = totalSalary * 3 + 40001;
+        verifiedValue = true;
+      }
 
       const userData = {
         uid: userInfo?.user?.uid,
@@ -69,9 +76,9 @@ const SignUpForm = () => {
         photoURL,
         role,
         accountNumber: parseFloat(accountNumber),
-        salary: parseFloat(salary),
+        salary: totalSalary,
         designation,
-        isVerified: false,
+        isVerified: verifiedValue,
         join: new Date().toLocaleString(),
         update: false,
       };
