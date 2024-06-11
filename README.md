@@ -8,7 +8,7 @@ WorkSync is an Employee Management platform designed to streamline the managemen
 
 - **Site Name**: WorkSync
 - **Site URL**: [https://arnabsahawrk-work-sync.web.app](https://arnabsahawrk-work-sync.web.app)
-- **Server Side GitHub Repository**: [Server Repository](https://github.com/programming-hero-web-course1/b9a12-server-side-arnabsahawrk)
+- **Server Side GitHub Repository**: [Server Repository](https://github.com/arnabsahawrk/WorkSync-Server.git)
 
 ## Login Credentials
 
@@ -71,8 +71,8 @@ To get the project up and running locally, follow these steps:
 
 1. **Clone the repository**:
    ```sh
-   git clone https://github.com/programming-hero-web-course1/b9a12-client-side-arnabsahawrk.git (Client Side)
-   git clone https://github.com/programming-hero-web-course1/b9a12-server-side-arnabsahawrk.git (Server Side)
+   git clone https://github.com/arnabsahawrk/WorkSync-Client.git (Client Side)
+   git clone https://github.com/arnabsahawrk/WorkSync-Server.git (Server Side)
    cd work-sync
    ```
 2. **Install dependencies**:
